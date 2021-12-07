@@ -22,6 +22,6 @@ $ docker-compose up --scale locustworker=2
 Once the containers deploy were done, you will be able to visit **localhost:8089** and start a load test.
 
 ### Customizing
-First of all, you need to indicate which host you are going to test against. Thus, we must set ${ATTACKED_HOST} in the docker-compose.yml file. Also, you can modify the endpoint targeted in the `locust/locustfile.py`. For more information about locustfile click [here](https://docs.locust.io/en/latest/writing-a-locustfile.html).
+First of all, you need to indicate which host you are going to test against. Thus, we must set _${ATTACKED_HOST}_ in the docker-compose.yml file. Also, you can modify the endpoint targeted in the `locust/locustfile.py`. For more information about locustfile click [here](https://docs.locust.io/en/latest/writing-a-locustfile.html).
 
 If you want to modify your mappings at any point then you have to update the `wiremock/mappings/mock_responses.json` file even with the delay function.
