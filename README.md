@@ -8,6 +8,7 @@ has been used to handle the load that can be placed upon the microservices.
 <p align="center">
   <img src = "https://github.com/jorgejcabrera/performance-test/blob/main/load%20test.png" width=980>
 </p>
+
 ### Requirements
 You only need Docker
 
