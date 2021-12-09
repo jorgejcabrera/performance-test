@@ -4,6 +4,10 @@ It's a project that takes advantage of docker and makes the load test easier. Al
 [Locust](https://locust.io/) were used to create http traffic. It has been used in a distributed mode with one master and one or more workers. Master node controls the behavior of the slaves, collects the results and slaves do the job of generating the load. 
 The Locust traffic will be targeted at a Spring Boot service which makes http calls towards a [Wiremock](http://wiremock.org/) server. Wiremock was set up with a delayDistribution to simulate the network behaviour in a better way. Finally, a [Ngnix](https://nginx.org/en/) load balancer 
 has been used to handle the load that can be placed upon the microservices. 
+
+<p align="center">
+  <img src = "https://github.com/jorgejcabrera/performance-test/blob/main/load%20test.jpg" width=350>
+</p>
 ### Requirements
 You only need Docker
 
