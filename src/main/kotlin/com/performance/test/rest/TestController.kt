@@ -16,6 +16,7 @@ class TestController {
 
     @GetMapping
     fun getTestResource(): ResponseEntity<TestResource> {
+        LOGGER.info("Working with a request")
         val client = OkHttpClient()
             .newBuilder()
             .readTimeout(ofMillis(5000))

@@ -1,14 +1,27 @@
 version: '3'
 
 services:
-  microservice:
+  microservice1:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: microservice
+    container_name: microservice1
+    environment:
+      - "SERVER_PORT=8080"
     ports:
       - "8080:8080"
       - "9090:9090"
+
+  microservice2:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: microservice2
+    environment:
+      - "SERVER_PORT=8082"
+    ports:
+      - "8082:8082"
+      - "9092:9090"
 
   wiremockserver:
     image: rodolpheche/wiremock
@@ -23,7 +36,7 @@ services:
       dockerfile: Dockerfile.locust
     container_name: masterlocust
     environment:
-      - "ATTACKED_HOST=http://microservice:8080"
+      - "ATTACKED_HOST=http://loadbalancer:4000"
       - "LOCUST_MODE=master"
     ports:
       - "8089:8089"
@@ -38,10 +51,20 @@ services:
       context: ./locust
       dockerfile: Dockerfile.locust
     environment:
-      - "ATTACKED_HOST=http://microservice:8080"
+      - "ATTACKED_HOST=http://loadbalancer:4000"
       - "NO_PROXY=masterlocust"
       - "LOCUST_MODE=slave"
       - "LOCUST_MASTER=masterlocust"
     volumes:
       - ./locust:/mnt/locust
     command: -f /mnt/locust/locustfile.py --name locustworker --link masterlocust
+
+  loadbalancer:
+    image: nginx:latest
+    volumes:
+      - ./loadbalancer/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - microservice1
+      - microservice2
+    ports:
+      - "4000:4000"
