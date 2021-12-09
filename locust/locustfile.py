@@ -7,6 +7,5 @@ class UserTasks(TaskSet):
     def index(self):
         self.client.get("/test")
 
-
 class WebsiteUser(HttpLocust):
     task_set = UserTasks
